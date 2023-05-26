@@ -1,0 +1,15 @@
+{
+  "name": "minecraft_player_head",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:sluppyy/minecraft_player_head.git",
+  "author": "Gleb <M20XV@yandex.ru>",
+  "license": "MIT",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2"
+  }
+}
