@@ -15,6 +15,6 @@ module.exports = async function(name, f) {
   } catch (e) {
     const data = (await f())
     await fs.writeFile(path, data)
-    return data
+    return fs.readFile(path)
   }
 }

@@ -2,6 +2,7 @@ const { env } = require('./env')
 const downloadSkin = require('./downloadSkin')
 const logger = require('./logger')
 const fs = require('fs/promises')
+const { AxiosError } = require('axios')
 
 const app = require('express')()
 
@@ -15,6 +16,13 @@ app.get('/:username', async (req, res) => {
     })
     res.end(buffer)  
   } catch (error) {
+    if (error instanceof AxiosError) {
+      if (error.response.status === 404) {
+        res.sendStatus(404)
+        return
+      }
+    }
+
     logger.error(error)
     res.status(500)
     res.send('internal error')
