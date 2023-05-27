@@ -4,24 +4,17 @@ const { resolve } = require("path");
 const cachePath = resolve(process.cwd(), "cache");
 
 /**
- * @param {string} key
- * @param {() => Promise<string>} f
- * @returns {Promise<string>}
+ * @param {string} name
+ * @param {() => Promise<Buffer>} f
+ * @returns {Promise<Buffer>}
  */
-module.exports = async function (key, f) {
-  const path = resolve(cachePath, key);
+module.exports = async function (name, f) {
+  const path = resolve(cachePath, name);
   try {
-    return await fs.readFile(path, { encoding: "utf-8" });
+    return await fs.readFile(path);
   } catch (e) {
     const data = await f();
     await fs.writeFile(path, data);
-    return data;
+    return fs.readFile(path);
   }
-};
-
-/**
- * @param {string} key
- */
-module.exports.invalidate = async function (key) {
-  await fs.rm(resolve(cachePath, key));
 };

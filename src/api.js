@@ -36,9 +36,10 @@ module.exports.getSkinUrl = async function (uuid) {
  */
 module.exports.getImage = async function (url) {
   logger.info(`Download image ${url}`);
-  return (
+  const img = (
     await axios.get(url, {
-      responseType: "stream",
+      responseType: "arraybuffer",
     })
   ).data;
+  return Buffer.from(img, "binary");
 };

@@ -1,6 +1,7 @@
 const sharp = require("sharp");
-const imgCache = require("./imgCache");
+const cache = require("./cache");
 const api = require("./api");
+const logger = require("./logger");
 
 async function getUUID(username) {
   return await api.getUserId(username);
@@ -13,12 +14,14 @@ async function getUrl(username) {
 
 async function getSourceBuffer(username) {
   const url = await getUrl(username);
-  return api.getImage(url);
+  const img = await api.getImage(url);
+  return img;
 }
 
 module.exports = async function (username) {
-  const head = await imgCache(`head-${username}.png`, async () => {
+  const head = await cache(`${username}.png`, async () => {
     const sourceBuffer = await getSourceBuffer(username);
+
     try {
       return sharp(sourceBuffer)
         .extract({
@@ -29,7 +32,7 @@ module.exports = async function (username) {
         })
         .toBuffer();
     } catch (error) {
-      console.error(error);
+      logger.error(error);
     }
   });
 

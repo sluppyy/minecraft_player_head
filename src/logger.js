@@ -16,10 +16,10 @@ module.exports = {
   },
 
   warn(string) {
-    console.warn(`[${time()}] \x1b[31m${string}\x1b[0m`);
+    console.warn(`[${time()}] \x1b[33m${string}\x1b[0m`);
   },
 
   error(string) {
-    console.warn(`[${time()}] \x1b[33m${string}\x1b[0m`);
+    console.warn(`[${time()}] \x1b[31m${string}\x1b[0m`);
   },
 };

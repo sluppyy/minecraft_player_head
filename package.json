@@ -6,7 +6,7 @@
   "author": "Gleb <M20XV@yandex.ru>",
   "license": "MIT",
   "scripts": {
-    "before": "mkdir cache; mkdir images; yarn install",
+    "before": "mkdir cache; yarn install",
     "start": "node src/index.js"
   },
   "dependencies": {
