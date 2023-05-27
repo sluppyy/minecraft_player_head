@@ -1,3 +1,11 @@
 node_modules/
 cahce/
 images/
+
+README.md
+*.d.ts
+
+.env.example
+npm-debug.log
+Dockerfile
+.dockerignore

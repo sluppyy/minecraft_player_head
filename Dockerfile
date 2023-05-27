@@ -1,13 +1,14 @@
-FROM node:18
+FROM node:18-alpine
 
 WORKDIR /usr/src/app
 
 COPY package*.json ./
 
-RUN npm ci install
+RUN npm install
 
 COPY . .
 
-EXPOSE 3000
+ENV port=3000
+EXPOSE $port
 
-CMD [ "npm", "run", "start" ]
+CMD [ "node", "src/index.js" ]
